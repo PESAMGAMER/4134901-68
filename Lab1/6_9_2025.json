@@ -1,0 +1,84 @@
+{
+  "name": "6/9/2025",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "first-workflow",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "abfcc6fd-4c2f-4765-8197-91e235350ce0",
+      "name": "Webhook",
+      "webhookId": "ab3a8670-919d-4f8d-8980-0ccccb96f585"
+    },
+    {
+      "parameters": {
+        "jsCode": "const name = $input.first().json.body?.name || \"Guest\";\nreturn {\n  json: {\n    message: `Hello, ${name}! Welcome to n8n`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "37f760c8-9a3b-4104-b23f-22d99e2c9951",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.3,
+      "position": [
+        440,
+        0
+      ],
+      "id": "a3daeb7c-a1fc-43d0-8102-81457bc73a71",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "f5c2fbc9-9d76-4474-96da-8bbe21e6f8b0",
+  "meta": {
+    "instanceId": "3ffe81eeecacc0ac8568bdf22d751da788df336c117cf55bde0e9089433631e5"
+  },
+  "id": "pQbWbXLXvITY6nXa",
+  "tags": []
+}

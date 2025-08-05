@@ -1,0 +1,313 @@
+{
+  "name": "Lab-3",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "call",
+        "responseMode": "lastNode",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8dfeddde-8f2e-4a44-8fae-cc75810685f5",
+      "name": "Webhook",
+      "webhookId": "519c0198-7552-48ca-8f11-fb529b7f8743"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "47564905-e513-4a32-afd3-edac38296b66",
+              "leftValue": "={{ $json.query.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "8dd32c81-17bf-47c2-93da-f730d6475ae9",
+              "leftValue": "={{ $json.query.age }}",
+              "rightValue": "21",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "b5f2d8f3-7e59-41b7-a75e-aa0b898d4ce5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d79ba6ab-21a7-4ec3-95a4-61db1f84fc28",
+              "name": "query.data",
+              "value": "={{ $json.query.data }}",
+              "type": "string"
+            },
+            {
+              "id": "266d5b94-832b-4c96-bd96-916f478156b7",
+              "name": "query.age",
+              "value": "={{ Number ($json.query.age) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        -100
+      ],
+      "id": "c97e27a5-0370-4114-9331-6fdd4218ed4f",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1aAJIJulrFDWP53UK6-aO4ddSHnIdhi_fBW42Z5btaYI",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aAJIJulrFDWP53UK6-aO4ddSHnIdhi_fBW42Z5btaYI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "ชีต1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aAJIJulrFDWP53UK6-aO4ddSHnIdhi_fBW42Z5btaYI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "data": "={{ $json.query.data }}"
+          },
+          "matchingColumns": [
+            "data"
+          ],
+          "schema": [
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1060,
+        -80
+      ],
+      "id": "1788f9fc-f983-43ef-a89c-4f5673a09b83",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "7nL1gOcVyFY4lML6",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e4c00b4f-1d57-4074-8ee5-61ee6390b562",
+              "leftValue": "={{ $json.query.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        680,
+        -100
+      ],
+      "id": "6a82b60a-7880-497a-911f-fda6364515ce",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a412d989-5541-4a91-94ce-97e14c31b60b",
+              "name": "data",
+              "value": "={{ $json.query.data }}",
+              "type": "string"
+            },
+            {
+              "id": "3b4c11ec-1fe6-4f58-878b-96fb96cb8f5d",
+              "name": "age",
+              "value": "={{ $json.query.age }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        900,
+        -180
+      ],
+      "id": "38293093-b657-4bb2-9d4f-d901bd0dceea",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        440,
+        100
+      ],
+      "id": "95e2c5af-194a-4fa7-aef3-d22d89315192",
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        []
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bcddc31d-8f43-4071-9292-ead2d07fa0d9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3ffe81eeecacc0ac8568bdf22d751da788df336c117cf55bde0e9089433631e5"
+  },
+  "id": "VY2Xy91ApM2dmUyZ",
+  "tags": []
+}

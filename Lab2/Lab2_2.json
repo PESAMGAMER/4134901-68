@@ -1,0 +1,109 @@
+{
+  "name": "Lab2-2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "users",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "dbc71a5e-dcc4-4eba-8a52-2ab10ee4de9a",
+      "name": "Webhook",
+      "webhookId": "342c3afe-c1c6-4afb-814b-db0e38dff944"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1e13286e-f3b0-4672-88c6-f612c05f4328",
+              "name": "name",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "85097c7c-2087-4694-8957-f7e1a7556a8f",
+              "name": "age",
+              "value": "={{ $json.body.age}}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "6357b679-e607-453d-8c7a-34a86414e5ca",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "projectId": "n8n-project-a58a0",
+        "collection": "users",
+        "columns": "name"
+      },
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "2f081cf8-1f74-4eba-8ae1-bc3388d62412",
+      "name": "Google Cloud Firestore",
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "ZwdZ9GAZCM7bGbOu",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bcad2e8c-60b7-4237-85ea-e8ee370899c9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3ffe81eeecacc0ac8568bdf22d751da788df336c117cf55bde0e9089433631e5"
+  },
+  "id": "SOzuX94qmI11bhZ5",
+  "tags": []
+}

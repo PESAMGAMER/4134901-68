@@ -1,0 +1,177 @@
+{
+  "name": "Lab2-1",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "26eafbae-cd33-4a0d-8357-56bac6060f1b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "08e7587f-b43b-4414-9bc6-b08060451495",
+              "name": "name",
+              "value": "Sam",
+              "type": "string"
+            },
+            {
+              "id": "c2e63abe-b41f-4ada-878c-810dd0ee8083",
+              "name": "age",
+              "value": 21,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "27505053-a267-49ca-a88f-8703a610b945",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "projectId": "n8n-project-a58a0",
+        "collection": "ีusers",
+        "columns": "=name,age"
+      },
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "b6bdfa75-1dba-497d-8095-7cad1f202707",
+      "name": "Google Cloud Firestore",
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "ZwdZ9GAZCM7bGbOu",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f9b4bba3-74cf-4b71-998c-af36c9faaf16",
+              "name": "_id",
+              "value": "={{ $json._id }}",
+              "type": "string"
+            },
+            {
+              "id": "7bfd496e-11bd-4f07-b976-3025de7936ef",
+              "name": "name",
+              "value": "Jhon",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        0
+      ],
+      "id": "77601d28-f736-417a-867b-de31f600d3ec",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "projectId": "n8n-project-a58a0",
+        "collection": "users",
+        "updateKey": "_id",
+        "columns": "name"
+      },
+      "type": "n8n-nodes-base.googleFirebaseCloudFirestore",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        0
+      ],
+      "id": "6499c0f1-e1e7-400e-904b-af7890bbc829",
+      "name": "Google Cloud Firestore1",
+      "credentials": {
+        "googleFirebaseCloudFirestoreOAuth2Api": {
+          "id": "ZwdZ9GAZCM7bGbOu",
+          "name": "Google Firebase Cloud Firestore account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Cloud Firestore": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google Cloud Firestore1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "709b8993-4aca-4c08-baef-40ae0d1bd07b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3ffe81eeecacc0ac8568bdf22d751da788df336c117cf55bde0e9089433631e5"
+  },
+  "id": "2z3NbXjYAvpkOqzq",
+  "tags": []
+}
